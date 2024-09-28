@@ -2,7 +2,7 @@ import streamlit as st
 import pickle
 
 # Load the trained model from a local file
-model_path = 'Email_Spam_Detection/model.pkl'
+model_path = 'model.pkl'
 
 try:
     with open(model_path, 'rb') as file:
