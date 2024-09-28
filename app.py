@@ -2,7 +2,7 @@ import streamlit as st # type: ignore
 import pickle
 
 # loading the trained model
-model = pickle.load(open('model.pkl', 'rb'))
+model = pickle.load(open('https://github.com/mdislammazharul/Email_Spam_Detection/blob/main/model.pkl', 'rb'))
 
 # create title
 st.title('Predicting if message is Spam or not')
