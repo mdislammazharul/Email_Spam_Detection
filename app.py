@@ -1,18 +1,29 @@
-import streamlit as st # type: ignore
+import streamlit as st
 import pickle
 
-# loading the trained model
-model = pickle.load(open('https://github.com/mdislammazharul/Email_Spam_Detection/blob/main/model.pkl', 'rb'))
+# Load the trained model from a local file
+model_path = 'Email_Spam_Detection/model.pkl'
 
-# create title
-st.title('Predicting if message is Spam or not')
+try:
+    with open(model_path, 'rb') as file:
+        model = pickle.load(file)
+except FileNotFoundError:
+    st.error("Error: Model file not found. Please check the path.")
+    model = None
+except Exception as e:
+    st.error(f"An error occurred while loading the model: {e}")
+    model = None
 
-# text input
+# Create title
+st.title('Predicting if a message is Spam or Not')
+
+# Text input
 message = st.text_input('Enter a message')
 
+# Prediction button
 submit = st.button('Predict')
 
-if submit:
+if submit and model is not None:
     prediction = model.predict([message])
 
     if prediction[0] == 'spam':
